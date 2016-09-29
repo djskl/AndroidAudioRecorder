@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">录音</string>
+    <string name="aar_recording">正在录音</string>
+    <string name="aar_playing">正在播放</string>
+    <string name="aar_play_over">结束</string>
+    <string name="aar_save">保存</string>
+</resources>

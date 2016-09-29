@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_media_play" />
+
+    <TextView
+        android:id="@+id/audio_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="xxxxx.mp3"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/audio_ctime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="1970/01/01 00:00:00"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/audio_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:text="0秒"
+        android:layout_marginLeft="20dp" />
+
+</LinearLayout>

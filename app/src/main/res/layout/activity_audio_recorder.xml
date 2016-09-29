@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/audio_recorder_cnt"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!--界面的上半部分：录音或播放-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <!--playing or recording-->
+        <TextView
+            android:id="@+id/recorder_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-10dp"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-light"
+            android:visibility="invisible"/>
+
+        <!--时间轴-->
+        <TextView
+            android:id="@+id/recorder_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60sp"
+            android:textColor="@android:color/white"
+            android:fontFamily="sans-serif-thin"
+            android:text="00:00:00"/>
+
+    </LinearLayout>
+
+    <!--界面的下半部分：3个控制按钮-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/aar_footer_height"
+        android:layout_alignParentBottom="true">
+
+        <!--重置按钮-->
+        <ImageButton
+            android:id="@+id/restart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/record"
+            android:layout_toLeftOf="@+id/record"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/aar_ic_restart"
+            android:onClick="restartRecording"
+            android:visibility="invisible"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <!--录制按钮-->
+        <ImageButton
+            android:id="@+id/record"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:layout_margin="15dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/aar_ic_rec"
+            android:onClick="toggleRecording"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <!--播放按钮-->
+        <ImageButton
+            android:id="@+id/play_btn_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/record"
+            android:layout_toRightOf="@+id/record"
+            android:layout_marginTop="50dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/aar_ic_play"
+            android:onClick="togglePlaying"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
