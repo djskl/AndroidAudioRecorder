@@ -3,7 +3,9 @@ package cnic.sdc.androidaudiorecorder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -32,18 +34,18 @@ public class MainActivity extends AppCompatActivity implements AudioItemFragment
         record_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                File audio_dir = getAudioDir();
                 DateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
-                String audio_path = Environment.getExternalStorageDirectory() + "/"+df.format(new Date())+".mp3";
+                String audio_path = audio_dir.getAbsolutePath() + "/"+df.format(new Date())+".mp3";
                 recordAudio(audio_path);
             }
         });
-
     }
 
     private void recordAudio(String filepath){
         AudioManager.with(MainActivity.this)
                 .setFilePath(filepath)
-                .setColor(getResources().getColor(R.color.recorder_bg))
+                .setColor(ContextCompat.getColor(MainActivity.this, R.color.recorder_bg))
                 .setRequestCode(RECORD_AUDIO)
                 .record();
     }
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements AudioItemFragment
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RECORD_AUDIO) {
             if (resultCode == RESULT_OK && data != null) {
                 String audio_path = data.getStringExtra("filepath");
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements AudioItemFragment
                 Toast.makeText(this, "录音文件未保存", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     @Override
@@ -80,6 +80,19 @@ public class MainActivity extends AppCompatActivity implements AudioItemFragment
                 .setFilePath(filepath)
                 .setColor(getResources().getColor(R.color.recorder_bg))
                 .play();
+    }
+
+    public static File getAudioDir() {
+        String path = Environment.getExternalStorageDirectory().getPath();
+        if (TextUtils.isEmpty(path)) {
+            return null;
+        }
+
+        File audio_dir = new File(path, "myaudios");
+        if (!audio_dir.exists()) {
+            audio_dir.mkdirs();
+        }
+        return audio_dir;
     }
 
 }

@@ -6,4 +6,6 @@
 
     <color name="recorder_bg">#7E57C2</color>
 
+    <color name="audio_item_divider">#b4b4b4</color>
+
 </resources>

@@ -1,8 +1,11 @@
 package cnic.sdc.androidaudiorecorder;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,6 +61,12 @@ public class AudioItemFragment extends Fragment {
             MyAudioItemRecyclerViewAdapter audio_adapter = new MyAudioItemRecyclerViewAdapter(Audios.ITEMS, mListener);
             recyclerView.setAdapter(audio_adapter);
             Audios.setAdapter(audio_adapter);
+
+            DividerLine dividerLine = new DividerLine();
+            dividerLine.setSize(2);
+            dividerLine.setColor(ContextCompat.getColor(context, R.color.audio_item_divider));
+            ((RecyclerView) view).addItemDecoration(dividerLine);
+
         }
 
         return view;
@@ -94,4 +103,65 @@ public class AudioItemFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(AudioItem item);
     }
+
+
+
+    /**
+     * 分隔线装饰
+     *
+     * @author youmingdot
+     */
+    class DividerLine extends RecyclerView.ItemDecoration {
+
+        // 画笔
+        private Paint paint;
+
+        // 分割线尺寸
+        private int size;
+
+        public DividerLine() {
+            paint = new Paint();
+        }
+
+        @Override
+        public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+            super.onDrawOver(c, parent, state);
+            drawHorizontal(c, parent);
+        }
+
+        /**
+         * 设置分割线颜色
+         *
+         * @param color 颜色
+         */
+        public void setColor(int color) {
+            paint.setColor(color);
+        }
+
+        /**
+         * 设置分割线尺寸
+         *
+         * @param size 尺寸
+         */
+        public void setSize(int size) {
+            this.size = size;
+        }
+
+        // 绘制水平分割线
+        protected void drawHorizontal(Canvas c, RecyclerView parent) {
+            final int left = parent.getPaddingLeft();
+            final int right = parent.getWidth() - parent.getPaddingRight();
+
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                final View child = parent.getChildAt(i);
+                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+                final int top = child.getBottom() + params.bottomMargin;
+                final int bottom = top + size;
+
+                c.drawRect(left, top, right, bottom, paint);
+            }
+        }
+    }
+
 }
